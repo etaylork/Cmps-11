@@ -87,7 +87,7 @@ class Complex{
    Complex sub(Complex z){
       // Fill in
       double a = this.re - z.re;
-      double b = this.re - z.im;
+      double b = this.im - z.im;
       return new Complex(a,b);
 
    }
@@ -107,13 +107,9 @@ class Complex{
    // this.equals(Complex.ZERO).
    Complex recip(){
       // Fill in
-      try{
-         this.equals(Complex.ZERO);
-      }catch(ArithmeticException ex){
-         System.out.println("Complex number is 0 cannot form a reciprocal. ");
-         if(this.re < 0)
-         return Complex.ZERO;
-      }
+      if (this.equals(Complex.ZERO)){
+            throw new NumberFormatException("the reciprocal of zero is zero.");
+         }
       
       double a = (this.re/(Math.pow(this.re,2) + Math.pow(this.im,2)));
       double b = (-1*this.im)/(Math.pow(this.re,2) + Math.pow(this.im,2));
@@ -128,15 +124,15 @@ class Complex{
    // z.equals(Complex.ZERO).
    Complex div(Complex z){
       // Fill in
-      try{
-         z.equals(Complex.ZERO);
-      }catch(ArithmeticException ex){
-         
-         System.out.println( "Complex number is 0 cannot find the qoutient. ");
-         return this.ZERO;
-      }
-      double w = ((this.re*z.re)+(this.im*z.im))/(Math.pow(this.re,2) + Math.pow(this.im,2));
-      double y = ((this.re*z.im)-(this.im*z.re))/(Math.pow(this.re,2) + Math.pow(this.im,2));
+      if (z.equals(Complex.ZERO)){
+            throw new NumberFormatException("Cannot divided by zero.");
+         }
+      double a = z.re;
+      double b = z.im;
+      double c = this.re;
+      double d = this.im;
+      double w = ((a*c)+(b*d))/(Math.pow(z.re,2) + Math.pow(z.im,2));
+      double y = ((a*d)-(b*c))/(Math.pow(z.re,2) + Math.pow(z.im,2));
       return new Complex(w,y);
    }
 
@@ -200,7 +196,11 @@ class Complex{
    // Return true iff this and obj have the same real and imaginary parts.
    public boolean equals(Object obj){
       // Fill in
-      return true; 
+      if(obj instanceof Complex){
+         Complex test = (Complex) obj;
+         return this.re == test.re && this.im == test.im;
+      }
+      return false; 
    }
 
    // valueOf()

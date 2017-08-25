@@ -47,7 +47,7 @@ class ComplexTest{
          C[i] = new Complex(in.nextLine());
          i++;
       }
-      
+     
       // perform some arithmetic operations
       C[0] = C[0].add(C[1]);
       C[2] = C[2].sub(C[3]);
@@ -62,6 +62,7 @@ class ComplexTest{
       // write 10 complex numbers to file
       for(i=0; i<10; i++){
          out.println(C[i]);
+
       }
       
       //System.out.println(C[0]);
